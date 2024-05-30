@@ -1,21 +1,90 @@
+:root {
+  --primary-color: #DE16CF;
+  --secondary-color: #00A3FF;
+  --bg-light-color: #25262D;
+  --bg-middle-color: #181921;
+  --bg-dark-color: #14121A;
+  --grey-color: #A7A7A7;
+}
+
+.main-page {
+  background-image: url('../public/bg/main-bg.webp');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
 h1 {
   font-size: 48px;
   line-height: 44px;
+  margin: 0;
 }
 
 h2 {
   font-size: 32px;
+  margin: 0;
+  line-height: 32px;
 }
 
 h3 {
   font-size: 20px;
+  margin: 0;
 }
 
 h4 {
   font-size: 18px;
+  margin: 0;
 }
 
 p {
   font-size: 18px;
+  margin: 0;
 }
 
+.link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: opacity 0.3s ease;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+.bg-blur {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.main-logo {
+  transition: opacity 0.3s ease;
+}
+
+.main-logo:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 769px) {
+  .main-page {
+    background-position: top left -20vh;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 42px;
+    line-height: 44px;
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 28px;
+  }
+}

@@ -50,6 +50,8 @@ const theme = createTheme({
         body: {
           margin: 0,
           padding: 0,
+          backgroundColor: 'var(--bg-dark-color)',
+          color: 'white',
           fontFamily: 'Involve, Arial, sans-serif',
         },
       },

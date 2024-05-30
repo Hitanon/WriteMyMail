@@ -1,0 +1,88 @@
+.primary-button {
+  padding: 16px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 50px;
+  outline: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50px;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  z-index: -2;
+}
+
+.primary-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  background: #000;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.primary-button:hover {
+  color: #000;
+}
+
+.primary-button:hover::after {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+}
+
+.primary-button .icon {
+  position: relative;
+  top: -2px;
+  margin-left: 5px;
+  width: 20px;
+  transition: filter 0.3s ease;
+}
+
+.primary-button:hover .icon {
+  filter: invert(1);
+}
+
+.card-mail {
+  padding: 10px 20px;
+
+  display: flex;
+  margin-left: 10px;
+  background-color: rgba(67, 40, 150, 0.5);
+  border-radius: 5px;
+}
+
+.card-mail .icon {
+  position: relative;
+  top: -1px;
+  margin-right: 8px;
+}
+
+@media (max-width: 576px) {
+  .primary-button {
+    font-size: 10px;
+    padding: 18px 15px;
+  }
+
+  .primary-button .icon {
+    top: 0;
+    width: 15px;
+  }
+}
