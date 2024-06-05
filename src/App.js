@@ -28,7 +28,7 @@ const App = observer(() => {
     user.setName(userInfo.name);
     user.setInfo(userInfo.info);
     user.setEmails(userInfo.emails);
-    user.setIsAuth(true);
+    user.setIsAuth(userInfo.isAuth);
   }
 
   useEffect(() => {

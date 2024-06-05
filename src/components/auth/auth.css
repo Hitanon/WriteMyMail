@@ -1,0 +1,129 @@
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    min-width: 40%;
+    background-color: var(--bg-middle-color);
+    padding: 60px 100px;
+    border-radius: 20px;
+}
+
+.login-form .title {
+    display: flex;
+    justify-content: center;
+}
+
+.login-form .title h1 {
+    margin-right: 14px;
+}
+
+.login-email {
+    margin-top: 40px;
+}
+
+.login-password {
+    margin-top: 20px;
+}
+
+.login-form .buttons {
+    margin-top: 30px;
+}
+
+.login-form .full-line {
+    width: 100%;
+}
+
+.login-form .margin-top {
+    margin-top: 15px;
+}
+
+.login-form .sep {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form .sep p {
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 40%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.login-form .sep .line {
+    background-color: white;
+    width: 25%;
+    height: 1px;
+}
+
+.hint {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.custom-input .MuiOutlinedInput-notchedOutline {
+    border-radius: 50px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-input .MuiOutlinedInput-root {
+    border-radius: 50px;
+    color: #fff;
+}
+
+.custom-input .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-input:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+}
+
+.custom-input.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #fff;
+}
+
+.custom-input .MuiInputAdornment-root .MuiIconButton-root {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.custom-input .MuiInputAdornment-root .MuiIconButton-root:hover {
+    color: #fff;
+}
+
+.custom-input .MuiInputBase-input {
+    color: #fff;
+    font-size: 16px;
+}
+
+@media (max-width: 576px) {
+    .login-form {
+        width: 100%;
+        padding: 80px 60px;
+    }
+}
+
+.auth-hint {
+    display: inline-block;
+    font-weight: 400;
+    opacity: 50%;
+    margin-left: 10px;
+}
+
+.add-email-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-email-title h1 {
+    margin-bottom: 20px;
+}

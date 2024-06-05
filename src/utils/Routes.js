@@ -5,6 +5,8 @@ import GenerateLetter from "../pages/GenerateLetter";
 import Account from "../pages/Account";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
+import AddEmail from "../pages/AddEmail";
+import AddInfo from "../pages/AddInfo";
 
 import {
     MAIN_ROUTE,
@@ -14,6 +16,8 @@ import {
     ACCOUNT_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
+    ADD_EMAIL_ROUTE,
+    ADD_INFO_ROUTE
 } from "./Consts";
 
 export const routes = [
@@ -44,5 +48,13 @@ export const routes = [
     {
         path: REGISTRATION_ROUTE,
         element: <Registration />,
+    },
+    {
+        path: ADD_EMAIL_ROUTE,
+        element: <AddEmail />,
+    },
+    {
+        path: ADD_INFO_ROUTE,
+        element: <AddInfo />,
     },
 ];

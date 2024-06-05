@@ -4,11 +4,24 @@
   --bg-light-color: #25262D;
   --bg-middle-color: #181921;
   --bg-dark-color: #14121A;
-  --grey-color: #A7A7A7;
+  --gray-color: #A7A7A7;
 }
+
 
 .main-page {
   background-image: url('../public/bg/main-bg.webp');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth-page {
+  background-image: url('../public/bg/auth-bg.webp');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;

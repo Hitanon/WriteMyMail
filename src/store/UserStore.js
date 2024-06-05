@@ -42,6 +42,10 @@ export default class UserStore {
         return this._info;
     }
 
+    addEmail (email) {
+        this._emails.push(email);
+    }
+
     setEmails(emails) {
         this._emails = emails;
     }
