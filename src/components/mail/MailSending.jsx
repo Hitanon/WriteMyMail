@@ -20,6 +20,11 @@ const MailSending = observer(({
         setRecipientMail(e.target.value);
     };
 
+    const handleUserMailChange = (email) => {
+        const selectedEmail = userMails.find(mail => mail.email === email);
+        setUserMail(selectedEmail);
+    };
+
     return (
         <>
             <div className="row mt-3">
@@ -34,7 +39,7 @@ const MailSending = observer(({
                         <MainSelect
                             options={userMails.map(email => email.email)}
                             activeOption={userMail.email}
-                            onChange={(email) => setUserMail(email)}
+                            onChange={handleUserMailChange}
                             placeholder="Нет доступных почт"
                         />
                     </div>

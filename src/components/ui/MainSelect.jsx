@@ -11,9 +11,11 @@ const MainSelect = ({ options, activeOption, onChange, placeholder }) => {
 
     return (
         <div className="select-container">
-            <div className="select-header" onClick={() => options.length && setIsOpen(!isOpen)}>
+            <div className="select-header" onClick={() => setIsOpen(!isOpen)}>
                 <span>{activeOption || placeholder}</span>
-                {options.length > 0 && <img src="/icons/arrow.svg" alt="Arrow" className={`arrow-icon ${isOpen ? 'open' : ''}`} />}
+                {options.length > 0 && (
+                    <img src="/icons/arrow.svg" alt="Arrow" className={`arrow-icon ${isOpen ? 'open' : ''}`} />
+                )}
             </div>
             {isOpen && options.length > 0 && (
                 <ul className="select-options">

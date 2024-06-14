@@ -1,4 +1,5 @@
 import Sidebar from '../components/general/Sidebar';
+import GenerateLetterContent from '../components/mail/GenerateLetterContent';
 
 const GenerateLetter = () => {
 
@@ -6,7 +7,7 @@ const GenerateLetter = () => {
     <div className='dashboard-page'>
       <Sidebar />
       <div className='dashboard-content'>
-        <h1>GenerateLetter</h1>
+        <GenerateLetterContent />
       </div>
     </div>
   );
