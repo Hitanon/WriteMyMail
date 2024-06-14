@@ -14,7 +14,21 @@ export const ADD_INFO_ROUTE = "/add_info";
 export const API_USER = "/api/user";
 export const API_USER_TOKEN = "api/user/login";
 export const API_USER_LOGOUT = "api/user/logout";
+
 export const API_USER_REGISTRATION = "api/user/registration";
+export const API_USER_ADD_EMAIL = "api/user/add_email";
+export const API_USER_UPDATE_EMAIL = "api/user/update_email";
+export const API_USER_DELETE_EMAIL = "api/user/delete_email";
+export const API_USER_DELETE_ALL_EMAILS = "api/user/delete_all_emails";
+
+export const API_USER_UPDATE_NAME = "api/user/update_name";
+export const API_USER_UPDATE_INFO = "api/user/update_info";
+
+export const API_IMPROVE_LETTER = "api/letter/improve";
+export const API_GENERATE_LETTER = "api/letter/generate";
+
+export const API_SEND_MAIL = "api/mail";
+
 
 
 //UI

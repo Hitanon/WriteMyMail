@@ -9,3 +9,11 @@
     color: var(--grey-color);
     margin-right: 10px;
 }
+
+.full-width {
+    width: 100%;
+}
+
+.m-bottom {
+    margin-bottom: 15px;
+}

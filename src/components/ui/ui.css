@@ -97,6 +97,156 @@
   margin-right: 8px;
 }
 
+/* input */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.custom-input::placeholder {
+  color: var(--gray-color);
+  font-weight: 400;
+}
+
+.custom-input:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* text area */
+.textarea-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.custom-textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  resize: none;
+  overflow-y: auto;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Involve', Arial, sans-serif;
+}
+
+.custom-textarea::placeholder {
+  color: var(--gray-color);
+  font-weight: 400;
+}
+
+.custom-textarea:focus {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Custom scrollbar styling */
+.custom-textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-textarea::-webkit-scrollbar-thumb {
+  background-color: var(--bg-light-color);
+  border-radius: 10px;
+}
+
+.custom-textarea::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
+.custom-textarea::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+/* selectbar */
+.select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.select-header:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+}
+
+.arrow-icon.open {
+  transform: rotate(90deg);
+}
+
+.select-options {
+  position: absolute;
+  width: 100%;
+  background-color: var(--bg-middle-color);
+  border-radius: 10px;
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.select-option {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.select-option:hover,
+.select-option.active {
+  background-color: rgba(0, 0, 0, 1);
+  color: #fff;
+}
+
+.select-option.active {
+  font-weight: bold;
+}
+
 @media (max-width: 576px) {
   .primary-button {
     font-size: 10px;

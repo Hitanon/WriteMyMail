@@ -5,6 +5,10 @@
   --bg-middle-color: #181921;
   --bg-dark-color: #14121A;
   --gray-color: #A7A7A7;
+  --red-color: #FF2828;
+  
+  --side-bar-width: 240px;
+  --side-bar-width-tablet: 120px;
 }
 
 
@@ -20,6 +24,17 @@
   justify-content: space-between;
 }
 
+.dashboard-page {
+  min-height: 100vh;
+  background-color: var(--bg-light-color);
+  padding-top: 42px;
+  padding-bottom: 62px;
+}
+
+.dashboard-content {
+  margin-left: var(--side-bar-width);
+}
+
 .auth-page {
   background-image: url('../public/bg/auth-bg.webp');
   background-position: top center;
@@ -31,7 +46,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
 
 h1 {
   font-size: 48px;
@@ -60,6 +74,12 @@ p {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+
 .link {
   color: white;
   text-decoration: none;
@@ -85,9 +105,17 @@ p {
   opacity: 0.6;
 }
 
+.error-message {
+  color: var(--red-color);
+}
+
 @media (max-width: 769px) {
   .main-page {
     background-position: top left -20vh;
+  }
+
+  .dashboard-content {
+    margin-left: var(--side-bar-width-tablet);
   }
 }
 
@@ -99,5 +127,9 @@ p {
   h2 {
     font-size: 28px;
     line-height: 28px;
+  }
+  .dashboard-content {
+    margin-left: 0;
+    margin-bottom: 100px;
   }
 }

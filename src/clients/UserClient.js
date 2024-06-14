@@ -1,5 +1,13 @@
 // import { $host, $authHost } from ".";
-// import { API_USER, API_USER_TOKEN, API_USER_LOGOUT, API_USER_REGISTRATION } from "../utils/Consts";
+// import {
+//     API_USER,
+//     API_USER_TOKEN,
+//     API_USER_LOGOUT,
+//     API_USER_REGISTRATION,
+//     API_USER_ADD_EMAIL,
+//     API_USER_UPDATE_NAME,
+//     API_USER_UPDATE_INFO,
+// } from "../utils/Consts";
 
 export const getUserInfo = async () => {
     try {
@@ -7,7 +15,7 @@ export const getUserInfo = async () => {
         // return response.data;
 
         const mockUserData = {
-            isAuth: false,
+            isAuth: true,
             login: 'user_mail@mail.com',
             name: 'UserName',
             info: 'Here will be info about user',
@@ -47,7 +55,7 @@ export const registerUser = async (credentials) => {
 
 export const addEmailToUser = async (emailData) => {
     // Implement the real request to the server to add the email
-    // const response = await $authHost.post(API_ADD_EMAIL, emailData);
+    // const response = await $authHost.post(API_USER_ADD_EMAIL, emailData);
     // return response.data;
 
     // Mocked response
@@ -57,9 +65,43 @@ export const addEmailToUser = async (emailData) => {
     };
 }
 
+export const updateUserEmail = async (emailData) => {
+    // Implement the real request to the server to update the email
+    // const response = await $authHost.put(API_USER_UPDATE_EMAIL, emailData);
+    // return response.data;
+
+    // Mocked response
+    return {
+        email: emailData.email,
+        password: emailData.password,
+    };
+}
+
+export const deleteUserEmail = async (email) => {
+    // Implement the real request to the server to delete the email
+    // const response = await $authHost.delete(`${API_USER_DELETE_EMAIL}/${email}`);
+    // return response.data;
+
+    // Mocked response
+    return {
+        email: email,
+    };
+}
+
+export const deleteAllUserEmails = async () => {
+    // Implement the real request to the server to delete all emails
+    // const response = await $authHost.delete(API_USER_DELETE_ALL_EMAILS);
+    // return response.data;
+
+    // Mocked response
+    return {
+        message: 'All emails deleted',
+    };
+}
+
 export const updateUserName = async (name) => {
     // Implement the real request to the server to update the name
-    // const response = await $authHost.put(API_UPDATE_NAME, { name });
+    // const response = await $authHost.put(API_USER_UPDATE_NAME, { name });
     // return response.data;
 
     // Mocked response
@@ -68,7 +110,7 @@ export const updateUserName = async (name) => {
 
 export const updateUserInfo = async (info) => {
     // Implement the real request to the server to update the info
-    // const response = await $authHost.put(API_UPDATE_INFO, { info });
+    // const response = await $authHost.put(API_USER_UPDATE_INFO, { info });
     // return response.data;
 
     // Mocked response

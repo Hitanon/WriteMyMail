@@ -35,6 +35,7 @@ const theme = createTheme({
       fontFamily: 'Involve, Arial, sans-serif',
       fontWeight: 700,
     },
+
     body1: {
       fontFamily: 'Involve, Arial, sans-serif',
       fontWeight: 400,

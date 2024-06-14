@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, IconButton, InputAdornment} from "@mui/material";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { validateEmail } from "../../utils/Validators";
 
 import { HOME_ROUTE, REGISTRATION_ROUTE } from "../../utils/Consts";
 
@@ -22,10 +23,6 @@ const LoginForm = () => {
     const navigate = useNavigate();
     const { login } = useAuthenticate();
 
-    const validateEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
-    };
 
     const onLoginClick = async () => {
         setEmailError("");
