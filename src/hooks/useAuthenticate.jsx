@@ -1,13 +1,23 @@
 import { useContext } from 'react';
 
 import { Context } from "../";
-import { logoutUser, getUserInfo, authenticateUser, registerUser, addEmailToUser, updateUserName, updateUserInfo } from '../clients/UserClient';
+import {
+    logoutUser,
+    getUserInfo,
+    authenticateUser,
+    registerUser,
+    addEmailToUser,
+    updateUserName,
+    updateUserInfo,
+    updateUserEmail,
+    deleteUserEmail,
+    deleteAllUserEmails
+} from '../clients/UserClient';
 
 const useAuthenticate = () => {
     const { user } = useContext(Context);
 
     const getInfo = async () => {
-        // change it
         const userInfo = await getUserInfo();
         if (userInfo === null) {
             return;
@@ -41,8 +51,23 @@ const useAuthenticate = () => {
     };
 
     const addEmail = async ({email, password}) => {
-        const newEmail = await addEmailToUser({email, password});
-        user.addEmail(newEmail);
+        await addEmailToUser({email, password});
+        await getInfo();
+    };
+
+    const updateEmail = async (emailData) => {
+        await updateUserEmail(emailData);
+        await getInfo();
+    };
+
+    const deleteEmail = async (email) => {
+        await deleteUserEmail(email);
+        await getInfo();
+    };
+
+    const deleteAllEmails = async () => {
+        await deleteAllUserEmails();
+        await getInfo();
     };
 
     const updateName = async (name) => {
@@ -56,15 +81,17 @@ const useAuthenticate = () => {
     };
 
     return {
-        login: login,
-        register: register,
-        logout: logout,
-        getInfo: getInfo,
-        addEmail: addEmail,
-        updateName: updateName,
-        updateInfo: updateInfo,
+        login,
+        register,
+        logout,
+        getInfo,
+        addEmail,
+        updateEmail,
+        deleteEmail,
+        deleteAllEmails,
+        updateName,
+        updateInfo,
     };
-
 };
 
 export default useAuthenticate;

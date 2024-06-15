@@ -33,3 +33,4 @@ export const API_SEND_MAIL = "api/mail";
 
 //UI
 export const OUR_EMAIL = "info@writemymail.com";
+export const EMAIL_COUNT_LIMIT = 3;

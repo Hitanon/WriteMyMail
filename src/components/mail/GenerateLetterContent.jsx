@@ -36,7 +36,6 @@ const GenerateLetterContent = observer(() => {
     const [userMailError, setUserMailError] = useState("");
 
     const [userNameError, setUserNameError] = useState("");
-
     const [subjectError, setSubjectError] = useState("");
     const [textError, setTextError] = useState("");
     const [userInfoError, setUserInfoError] = useState("");
@@ -247,7 +246,6 @@ const GenerateLetterContent = observer(() => {
                             callback={onCancelClick}
                         />
                     }
-
                 </div>
             </div>
             <div className="row mt-3">

@@ -1,3 +1,4 @@
+import AccountContent from '../components/auth/AccountContent';
 import Sidebar from '../components/general/Sidebar';
 
 const Account = () => {
@@ -5,7 +6,9 @@ const Account = () => {
   return (
     <div className='dashboard-page'>
       <Sidebar />
-      <h1>Account</h1>
+      <div className='dashboard-content'>
+        <AccountContent />
+      </div>
     </div>
   );
 };

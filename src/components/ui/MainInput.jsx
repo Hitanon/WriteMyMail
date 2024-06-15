@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ui.css';
 
-const MainInput = ({ placeholder, value, onChange, isLoading }) => {
+const MainInput = ({ placeholder, value, onChange, isLoading, disabled = false, type = "text" }) => {
     const [loadingText, setLoadingText] = useState('Генерируем');
 
     useEffect(() => {
@@ -17,11 +17,11 @@ const MainInput = ({ placeholder, value, onChange, isLoading }) => {
         <div className="input-container">
             <input
                 className="custom-input"
-                type="text"
+                type={type}
                 placeholder={isLoading ? loadingText : placeholder}
                 value={isLoading ? '' : value}
                 onChange={onChange}
-                disabled={isLoading}
+                disabled={isLoading || disabled}
             />
         </div>
     );

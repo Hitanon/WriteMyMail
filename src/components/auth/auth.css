@@ -69,6 +69,10 @@
     margin-left: 10px;
 }
 
+.custom-input {
+    background-color: transparent;
+}
+
 .custom-input .MuiOutlinedInput-notchedOutline {
     border-radius: 50px;
     border-color: rgba(255, 255, 255, 0.2);
@@ -104,10 +108,92 @@
     font-size: 16px;
 }
 
+.exit-button {
+    outline: 2px var(--red-color) solid;
+    transition: background 0.3s ease, color 0.3s ease, filter 0.3s ease;
+}
+
+.exit-button:hover {
+    background-color: var(--red-color);
+}
+
+.exit-button:hover img {
+    filter: brightness(1000%);
+}
+
+.login-section {
+    display: flex;
+    align-items: center;
+}
+
+.login-section h2 {
+    margin-right: 20px;
+}
+
+.info-row {
+    display: flex;
+}
+
+.info-row .icon-button {
+    margin-left: 10px;
+    align-items: center;
+}
+
+.email-card {
+    background: linear-gradient(to right, #0E0F10, #161227);
+    border-radius: 20px;
+    padding: 40px 30px;
+}
+
+.mail-row {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+}
+.email-input {
+    width: 45%;
+    margin-right: 20px;
+}
+
+.buttons-row {
+    margin-top: 10px;
+    display: flex;
+}
+
+.edit-email-btn {
+    width: 30%;
+    margin-right: 20px;
+}
+
 @media (max-width: 576px) {
     .login-form {
         width: 100%;
         padding: 80px 60px;
+    }
+
+    .login-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .exit-button {
+        margin-top: 24px;
+    }
+
+    .mail-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .email-input {
+        width: 100%;
+    }
+
+    .buttons-row {
+        flex-direction: column;
+    }
+    .edit-email-btn {
+        width: 100%;
     }
 }
 
