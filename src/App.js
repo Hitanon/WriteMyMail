@@ -1,55 +1,68 @@
 import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
+import { CircularProgress, Box } from "@mui/material";
 
 import { getUserInfo } from "./clients/UserClient";
 
 import { Context } from ".";
 
 import AppRouter from "./components/general/AppRouter";
-import TechnicalWorks from "./components/general/TechnicalWorks";
 
 const App = observer(() => {
-  const [isAlive, setIsALive] = useState(false);
   const { user } = useContext(Context);
+  const [loading, setLoading] = useState(true);
 
-  const checkIsAlive = async () => {
-    // change it
-    setIsALive(true);
-  }
+  const loadUserInfo = useCallback(async () => {
+    const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
 
-  const loadUserInfo = async () => {
-    // change it
-    const userInfo = await getUserInfo();
-    if (userInfo === null) {
+    if (!token || !userId) {
+      setLoading(false);
       return;
     }
-    user.setLogin(userInfo.login);
-    user.setName(userInfo.name);
-    user.setInfo(userInfo.info);
-    user.setEmails(userInfo.emails);
-    user.setIsAuth(userInfo.isAuth);
-  }
+
+    try {
+      const userInfo = await getUserInfo(userId);
+      if (userInfo) {
+        user.setId(userId);
+        user.setLogin(userInfo.username);
+        user.setName(userInfo.name);
+        user.setInfo(userInfo.info);
+        user.setEmails(userInfo.emails);
+        user.setIsAuth(true);       
+      }
+    } catch (error) {
+      console.error("Failed to load user info:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [user]);
 
   useEffect(() => {
-    checkIsAlive();
     loadUserInfo();
-  })
+  }, [loadUserInfo]);
 
-  if (!isAlive) {
+  if (loading) {
     return (
-      <TechnicalWorks />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Box>
     );
   }
 
   return (
-    <>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
-    </>
-  )
-
-})
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
+  );
+});
 
 export default App;

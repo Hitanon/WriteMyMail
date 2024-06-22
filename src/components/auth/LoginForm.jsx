@@ -10,13 +10,15 @@ import useAuthenticate from "../../hooks/useAuthenticate";
 
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
+import MainModal from "../general/MainModal";
 
 import "./auth.css";
 
 const LoginForm = () => {
     const [hasError, setHasError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [email, setEmail] = useState("test@email.com");
-    const [password, setPassword] = useState("1234");
+    const [password, setPassword] = useState("test1234");
     const [showPassword, setShowPassword] = useState(false);
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -43,11 +45,17 @@ const LoginForm = () => {
             hasError = true;
         }
 
+        if (password.length < 8) {
+            setPasswordError("Длина пароля меньше 8 символов");
+            hasError = true;
+        }
+
         if (!hasError) {
             try {
                 await login({ email, password });
                 navigate(HOME_ROUTE);
             } catch (e) {
+                setErrorMessage("Ошибка при входе: " + (e.response?.data?.detail || e.response?.data?.violations[0]?.message || e.message));
                 setHasError(true);
             }
         }
@@ -117,6 +125,7 @@ const LoginForm = () => {
                     <SecondaryButton text="Создать аккаунт" callback={onRegistrationClick} className="full-line margin-top" />
                 </div>
             </div>
+            <MainModal open={hasError} handleClose={() => setHasError(false)} message={errorMessage} iconSrc="/icons/exclamation.svg" iconAlt="Error" />
         </div>
     );
 };

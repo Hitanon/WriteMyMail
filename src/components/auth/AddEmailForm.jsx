@@ -10,11 +10,13 @@ import useAuthenticate from "../../hooks/useAuthenticate";
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
 import CardsList from "../mail/CardsList";
+import MainModal from "../general/MainModal";
 
 import "./auth.css";
 
 const AddEmailForm = () => {
     const [hasError, setHasError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [email, setEmail] = useState("test@email.com");
     const [password, setPassword] = useState("1234");
     const [showPassword, setShowPassword] = useState(false);
@@ -46,12 +48,14 @@ const AddEmailForm = () => {
             setPasswordError("Пароль не может быть пустым");
             hasError = true;
         }
+        
 
         if (!hasError) {
             try {
                 await addEmail({ email, password });
                 navigate(ADD_INFO_ROUTE);
             } catch (e) {
+                setErrorMessage("Ошибка при добавлении почты: " + (e.response?.data?.detail || e.message));
                 setHasError(true);
             }
         }
@@ -116,6 +120,7 @@ const AddEmailForm = () => {
                     <SecondaryButton text="Пропустить" callback={onSkipClick} className="full-line margin-top" />
                 </div>
             </div>
+            <MainModal open={hasError} handleClose={() => setHasError(false)} message={errorMessage} iconSrc="/icons/exclamation.svg" iconAlt="Error" />
         </div>
     );
 };

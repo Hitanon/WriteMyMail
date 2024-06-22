@@ -21,7 +21,7 @@ const MailSending = observer(({
     };
 
     const handleUserMailChange = (email) => {
-        const selectedEmail = userMails.find(mail => mail.email === email);
+        const selectedEmail = userMails.find(mail => mail.name === email);
         setUserMail(selectedEmail);
     };
 
@@ -37,8 +37,8 @@ const MailSending = observer(({
                     <div className="dashboard-card">
                         <p>Ваша почта: {userMailError && <span className="error-message">{userMailError}</span>}</p>
                         <MainSelect
-                            options={userMails.map(email => email.email)}
-                            activeOption={userMail.email}
+                            options={userMails.map(email => email?.name)}
+                            activeOption={userMail?.name}
                             onChange={handleUserMailChange}
                             placeholder="Нет доступных почт"
                         />
@@ -52,7 +52,7 @@ const MailSending = observer(({
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-md-4 col-sm-12">
+                <div className="col-lg-4 col-md-6 col-sm-12">
                     {isMailSending ? (
                         <CircularProgress color="inherit" />
                     ) : (

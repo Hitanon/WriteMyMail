@@ -1,118 +1,110 @@
-// import { $host, $authHost } from ".";
-// import {
-//     API_USER,
-//     API_USER_TOKEN,
-//     API_USER_LOGOUT,
-//     API_USER_REGISTRATION,
-//     API_USER_ADD_EMAIL,
-//     API_USER_UPDATE_NAME,
-//     API_USER_UPDATE_INFO,
-// } from "../utils/Consts";
+import { $host, $authHost } from ".";
+import {
+    API_USER_UPDATE,
+    API_AUTH_LOGIN,
+    API_AUTH_REGISTER,
+    API_AUTH_REFRESH,
+    API_EMAIL_CREATE,
+    API_EMAIL_UPDATE,
+    API_EMAIL_DELETE,
+    API_USER_EMAILS,
+    API_USER_INFO
+} from "../utils/Consts";
 
-export const getUserInfo = async () => {
+// Получение информации о пользователе и его почт
+export const getUserInfo = async (userId) => {
     try {
-        // const response = await $authHost.get(API_USER);
-        // return response.data;
-
-        const mockUserData = {
-            isAuth: true,
-            login: 'user_mail@mail.com',
-            name: 'UserName',
-            info: 'Here will be info about user',
-            emails: [
-                {
-                    type: 'gmail',
-                    email: 'mockuser@gmail.com',
-                    password: 'password',
-                },
-                {
-                    type: 'yandex',
-                    email: 'mockuser@yandex.ru',
-                    password: 'password',
-                },
-            ],
+        const userInfoResponse = await $authHost.get(API_USER_INFO.replace("{userId}", userId));
+        const emailsResponse = await $authHost.get(API_USER_EMAILS.replace("{userId}", userId));
+        return {
+            ...userInfoResponse.data,
+            emails: emailsResponse.data,
         };
-        return mockUserData;
     } catch (e) {
         return null;
     }
-}
-
-export const authenticateUser = async (credential) => {
-    // const respons = await $host.post(API_USER_TOKEN, credentials);
-    // return respons.data.token;
-    const mockJWT = "jwt_token";
-    return mockJWT;
-}
-
-export const logoutUser = async () => {
-    // await $authHost.post(API_USER_LOGOUT);
 };
 
+// Аутентификация пользователя
+export const authenticateUser = async (credentials) => {
+    try {
+        const response = await $host.post(API_AUTH_LOGIN, credentials);
+        return response;
+    } catch (e) {
+        console.error("Authentication failed", e);
+        throw e;
+    }
+};
+
+
+// Регистрация пользователя
 export const registerUser = async (credentials) => {
-    // await $host.post(API_USER_REGISTRATION, credentials);
-}
+    try {
+        await $host.post(API_AUTH_REGISTER, credentials);
+    } catch (e) {
+        console.error("Ошибка регистрации:", e);
+        throw e;
+    }
+};
+
+// Обновление токена
+export const refreshToken = async () => {
+    try {
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!refreshToken) throw new Error("No refresh token available");
+
+        const response = await $host.post(`${API_AUTH_REFRESH}?refreshToken=${refreshToken}`);
+        const { accessToken, refreshToken: newRefreshToken } = response.data;
+
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", newRefreshToken);
+        return accessToken;
+    } catch (e) {
+        console.error("Failed to refresh token", e);
+        throw e;
+    }
+};
+
 
 export const addEmailToUser = async (emailData) => {
-    // Implement the real request to the server to add the email
-    // const response = await $authHost.post(API_USER_ADD_EMAIL, emailData);
-    // return response.data;
+    try {
+        const response = await $authHost.post(API_EMAIL_CREATE, emailData);
+        return response.data;
+    } catch (e) {
+        console.error("Ошибка добавления почты: ", e);
+        throw e;
+    }
+};
 
-    // Mocked response
-    return {
-        email: emailData.email,
-        password: emailData.password,
-    };
-}
-
+// Обновление почты пользователя
 export const updateUserEmail = async (emailData) => {
-    // Implement the real request to the server to update the email
-    // const response = await $authHost.put(API_USER_UPDATE_EMAIL, emailData);
-    // return response.data;
+    try {
+        const response = await $authHost.post(API_EMAIL_UPDATE, emailData);
+        return response.data;
+    } catch (e) {
+        console.error("Ошибка сохранения почты: ", e);
+        throw e;
+    }
+};
 
-    // Mocked response
-    return {
-        email: emailData.email,
-        password: emailData.password,
-    };
-}
+// Удаление почты пользователя
+export const deleteUserEmail = async (emailData) => {
+    try {
+        const response = await $authHost.delete(API_EMAIL_DELETE, { data: emailData });
+        return response.data;
+    } catch (e) {
+        console.error("Ошибка удаления почты: ", e);
+        throw e;
+    }
+};
 
-export const deleteUserEmail = async (email) => {
-    // Implement the real request to the server to delete the email
-    // const response = await $authHost.delete(`${API_USER_DELETE_EMAIL}/${email}`);
-    // return response.data;
-
-    // Mocked response
-    return {
-        email: email,
-    };
-}
-
-export const deleteAllUserEmails = async () => {
-    // Implement the real request to the server to delete all emails
-    // const response = await $authHost.delete(API_USER_DELETE_ALL_EMAILS);
-    // return response.data;
-
-    // Mocked response
-    return {
-        message: 'All emails deleted',
-    };
-}
-
-export const updateUserName = async (name) => {
-    // Implement the real request to the server to update the name
-    // const response = await $authHost.put(API_USER_UPDATE_NAME, { name });
-    // return response.data;
-
-    // Mocked response
-    return name;
-}
-
-export const updateUserInfo = async (info) => {
-    // Implement the real request to the server to update the info
-    // const response = await $authHost.put(API_USER_UPDATE_INFO, { info });
-    // return response.data;
-
-    // Mocked response
-    return info;
-}
+// Обновление информации пользователя
+export const updateUserInfo = async (data) => {
+    try {
+        const response = await $authHost.post(API_USER_UPDATE, data);
+        return response.data;
+    } catch (e) {
+        console.error("Failed to update user info", e);
+        throw e;
+    }
+};

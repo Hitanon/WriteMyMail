@@ -231,7 +231,7 @@ const GenerateLetterContent = observer(() => {
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-md-4 col-sm-12">
+                <div className="col-lg-4 col-md-6 col-sm-12">
                     <PrimaryButton
                         className='main-button full-width m-bottom'
                         text="Cгенеририовать письмо"

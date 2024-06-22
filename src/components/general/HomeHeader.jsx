@@ -1,4 +1,8 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+
+import { Context } from "../..";
 
 import PrimaryButton from "../ui/PrimaryButton";
 
@@ -11,7 +15,8 @@ import {
 import "./general.css";
 
 
-const HomeHeader = () => {
+const HomeHeader = observer(() => {
+    const { user } = useContext(Context);
     const navigate = useNavigate();
 
     const onToAccountClick = () => {
@@ -35,27 +40,31 @@ const HomeHeader = () => {
                     </h1>
                 </div>
             </div>
-            <div className="row mt-5">
-                <div className="col-md-9 dashboard-title">
-                    <h2>
-                        1. Добавьте почту и инофрмацию о себе в аккаунт
-                    </h2>
-                    <img className="dashboard-logo" src="/icons/account.svg" alt="Account" />
-                </div>
-            </div>
-            <div className="row mt-3">
-                <div className="col-md-9">
-                    <div className="dashboard-card">
-                        <p>
-                            Это нужно сделать, чтобы появилась возможность отправлять письма напрямую с сайта и определить значения по умолчанию для имени и информации об отправителе
-                        </p>
-                        <div className="dashboard-card-row">
-                            <PrimaryButton text="Перейти в аккаунт" iconSrc="/icons/arrow.svg" iconAlt="Arrow" callback={onToAccountClick} />
+            {(!user.name || !user.info) &&
+                <>
+                    <div className="row mt-5">
+                        <div className="col-md-9 dashboard-title">
+                            <h2>
+                                1. Добавьте почту и инофрмацию о себе в аккаунт
+                            </h2>
+                            <img className="dashboard-logo" src="/icons/account.svg" alt="Account" />
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="row mt-4">
+                    <div className="row mt-3">
+                        <div className="col-md-9">
+                            <div className="dashboard-card">
+                                <p>
+                                    Это нужно сделать, чтобы появилась возможность отправлять письма напрямую с сайта и определить значения по умолчанию для имени и информации об отправителе
+                                </p>
+                                <div className="dashboard-card-row">
+                                    <PrimaryButton text="Перейти в аккаунт" iconSrc="/icons/arrow.svg" iconAlt="Arrow" callback={onToAccountClick} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>}
+
+            <div className="row mt-5">
                 <div className="col-md-9 dashboard-title">
                     <h2>
                         2. Выберите режим для генерации
@@ -99,6 +108,6 @@ const HomeHeader = () => {
             </div>
         </div>
     )
-};
+});
 
 export default HomeHeader;

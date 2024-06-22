@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, IconButton, InputAdornment } from "@mui/material";
@@ -9,11 +10,13 @@ import useAuthenticate from "../../hooks/useAuthenticate";
 
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
+import MainModal from "../general/MainModal";
 
 import "./auth.css";
 
 const RegistrationForm = () => {
     const [hasError, setHasError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [email, setEmail] = useState("test@email.com");
     const [password, setPassword] = useState("1234");
     const [showPassword, setShowPassword] = useState(false);
@@ -46,11 +49,17 @@ const RegistrationForm = () => {
             hasError = true;
         }
 
+        if (password.length < 8) {
+            setPasswordError("Длина пароля должна быть минимум 8 символов");
+            hasError = true;
+        }
+
         if (!hasError) {
             try {
                 await register({ email, password });
                 navigate(ADD_EMAIL_ROUTE);
             } catch (e) {
+                setErrorMessage("Ошибка при регистрации: " + (e.response?.data?.detail || e.message));
                 setHasError(true);
             }
         }
@@ -60,7 +69,7 @@ const RegistrationForm = () => {
         navigate(LOGIN_ROUTE);
     };
 
-    const handleCLickShowPassword = () => {
+    const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
@@ -102,7 +111,7 @@ const RegistrationForm = () => {
                             className: "custom-input",
                             endAdornment: (
                                 <InputAdornment position="end">
-                                    <IconButton onClick={handleCLickShowPassword}>
+                                    <IconButton onClick={handleClickShowPassword}>
                                         {showPassword ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
@@ -120,6 +129,7 @@ const RegistrationForm = () => {
                     <SecondaryButton text="Войти" callback={onLoginClick} className="full-line margin-top" />
                 </div>
             </div>
+            <MainModal open={hasError} handleClose={() => setHasError(false)} message={errorMessage} iconSrc="/icons/exclamation.svg" iconAlt="Error" />
         </div>
     );
 };

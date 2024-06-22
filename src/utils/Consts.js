@@ -11,24 +11,27 @@ export const ADD_INFO_ROUTE = "/add_info";
 
 
 //API
-export const API_USER = "/api/user";
-export const API_USER_TOKEN = "api/user/login";
-export const API_USER_LOGOUT = "api/user/logout";
+// Auth Endpoints
+export const API_AUTH_LOGIN = "/api/v1/auth";
+export const API_AUTH_REGISTER = "/api/v1/auth/register";
+export const API_AUTH_REFRESH = "/api/v1/auth/refresh";
 
-export const API_USER_REGISTRATION = "api/user/registration";
-export const API_USER_ADD_EMAIL = "api/user/add_email";
-export const API_USER_UPDATE_EMAIL = "api/user/update_email";
-export const API_USER_DELETE_EMAIL = "api/user/delete_email";
-export const API_USER_DELETE_ALL_EMAILS = "api/user/delete_all_emails";
+// User Endpoints
+export const API_USER_UPDATE = "/api/v1/user/update";
+export const API_USER_INFO = "/api/v1/user/{userId}";
+export const API_USER_EMAILS = "/api/v1/user/{userId}/emails";
 
-export const API_USER_UPDATE_NAME = "api/user/update_name";
-export const API_USER_UPDATE_INFO = "api/user/update_info";
+// Email Endpoints
+export const API_EMAIL_CREATE = "/api/v1/email/create";
+export const API_EMAIL_UPDATE = "/api/v1/email/update";
+export const API_EMAIL_DELETE = "/api/v1/email/delete";
 
-export const API_IMPROVE_LETTER = "api/letter/improve";
-export const API_GENERATE_LETTER = "api/letter/generate";
+// Mail Endpoints
+export const API_MAIL_SEND = "/api/v1/mail/send";
 
-export const API_SEND_MAIL = "api/mail";
-
+// AI Endpoints
+export const API_AI_UPGRADE = "/api/v1/ai/upgrade";
+export const API_AI_GENERATE = "/api/v1/ai/generate";
 
 
 //UI

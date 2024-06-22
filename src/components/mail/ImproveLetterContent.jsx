@@ -173,14 +173,14 @@ const ImproveLetterContent = observer(() => {
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-md-4 col-sm-12">
+                <div className="col-lg-4 col-md-6 col-sm-12">
                     <PrimaryButton
                         className='main-button full-width m-bottom'
                         text="Улучшить письмо"
                         callback={onImproveClick}
                     />
                 </div>
-                <div className="col-md-4 col-sm-12">
+                <div className=" col-lg-4 col-md-6 col-sm-12">
                     <SecondaryButton
                         className='main-button full-width m-bottom'
                         text={letter.text ? "Отменить изменения" : "Очистить"}

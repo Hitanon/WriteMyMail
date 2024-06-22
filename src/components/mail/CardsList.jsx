@@ -8,7 +8,7 @@ const CardsList = () => {
       <p className="cards-list-title">
         Доступны:
       </p>
-      <CardMail text="Gmail" iconSrc="/icons/gmail.svg" iconAlt="Gmail" />
+      <CardMail text="Mail.ru" iconSrc="/icons/mail.svg" iconAlt="Mail.ru" />
       <CardMail text="Yandex" iconSrc="/icons/yandex.svg" iconAlt="Yandex" />
     </div>
   )

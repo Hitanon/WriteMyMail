@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { Context } from "../..";
 import { capitalize } from "@mui/material";
@@ -21,25 +21,23 @@ const AccountContent = observer(() => {
   const { user } = useContext(Context);
   const {
     logout,
-    updateName,
     updateInfo,
     addEmail,
     updateEmail,
     deleteEmail,
     deleteAllEmails,
-    getInfo,
   } = useAuthenticate();
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState(user.name);
-  const [userInfo, setUserInfo] = useState(user.info);
+  const [userName, setUserName] = useState(user?.name || "");
+  const [userInfo, setUserInfo] = useState(user?.info || "");
   const [editingEmailIndex, setEditingEmailIndex] = useState(null);
   const [newEmail, setNewEmail] = useState({ email: "", password: "" });
   const [editEmailError, setEditEmailError] = useState("");
   const [editPasswordError, setEditPasswordError] = useState("");
   const [newEmailError, setNewEmailError] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
-  const [editedEmails, setEditedEmails] = useState(user.emails.map(email => ({ ...email })));
+  const [editedEmails, setEditedEmails] = useState(user?.emails?.map(email => ({ ...email })) || []);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -50,12 +48,8 @@ const AccountContent = observer(() => {
 
   const onSaveUserInfoClick = async () => {
     try {
-      if (user.name !== userName) {
-        await updateName(userName);
-      }
-
-      if (user.info !== userInfo) {
-        await updateInfo(userInfo);
+      if (user.name !== userName || user.info !== userInfo) {
+        await updateInfo(userName, userInfo);
       }
     } catch (e) {
       setErrorMessage("Ошибка при обновлении информации пользователя: " + e.message);
@@ -97,7 +91,7 @@ const AccountContent = observer(() => {
 
   const onSaveEmailClick = async (index) => {
     const email = editedEmails[index];
-    if (!email.email || !validateEmail(email.email)) {
+    if (!email.name || !validateEmail(email.name)) {
       setEditEmailError("(введите корректный email)");
       return;
     }
@@ -108,21 +102,23 @@ const AccountContent = observer(() => {
 
     try {
       await updateEmail(email);
-      setEditedEmails(user.emails.map(email => ({ ...email })));
       setEditingEmailIndex(null);
       setEditEmailError("");
       setEditPasswordError("");
     } catch (e) {
-      setErrorMessage("Ошибка при обновлении почты: " + e.message);
+      setErrorMessage("Ошибка при обновлении почты: " + e?.message);
       setHasError(true);
+    } finally {
+      setEditedEmails(user.emails.map(email => ({ ...email })));
     }
   };
 
   const onDeleteEmailClick = async (index) => {
     try {
-      await deleteEmail(user.emails[index].email);
+      const email = editedEmails[index];
+      await deleteEmail(email);
     } catch (e) {
-      setErrorMessage("Ошибка при удалении почты: " + e.message);
+      setErrorMessage("Ошибка при удалении почты: " + e?.message);
       setHasError(true);
     }
   };
@@ -145,6 +141,8 @@ const AccountContent = observer(() => {
     } catch (e) {
       setErrorMessage("Ошибка при добавлении почты: " + e.message);
       setHasError(true);
+    } finally {
+      setEditedEmails(user.emails.map(email => ({ ...email })));
     }
   };
 
@@ -210,14 +208,14 @@ const AccountContent = observer(() => {
         </div>
         {(user.name !== userName || user.info !== userInfo) && (
           <div className="row mt-1">
-            <div className="col-md-4 col-sm-12">
+            <div className="col-lg-4 col-md-6 col-sm-12">
               <PrimaryButton
                 className="main-button full-width m-bottom"
                 text="Сохранить"
                 callback={onSaveUserInfoClick}
               />
             </div>
-            <div className="col-md-4 col-sm-12">
+            <div className="col-lg-4 col-md-6 col-sm-12">
               <SecondaryButton
                 className="main-button full-width m-bottom"
                 text="Отменить изменения"
@@ -232,7 +230,7 @@ const AccountContent = observer(() => {
           </div>
         </div>
 
-        {user.emails.length > 0 &&
+        {editedEmails && editedEmails.length > 0 &&
           user.emails.map((email, index) => (
             <div className="row mt-4" key={index}>
               <div className="col-md-12">
@@ -261,8 +259,8 @@ const AccountContent = observer(() => {
                       <p>E-mail: {editingEmailIndex === index && editEmailError && <span className="error-message">{editEmailError}</span>}</p>
                       <MainInput
                         placeholder="Ваша почта..."
-                        value={editedEmails[index].email}
-                        onChange={(e) => handleEmailChange(index, 'email', e.target.value)}
+                        value={editedEmails[index]?.name || ""}
+                        onChange={(e) => handleEmailChange(index, 'name', e.target.value)}
                         disabled={editingEmailIndex !== index}
                       />
                     </div>
@@ -270,7 +268,7 @@ const AccountContent = observer(() => {
                       <p>Пароль <span className="add-requierements">(ключ разработчика)</span>: {editingEmailIndex === index && editPasswordError && <span className="error-message">{editPasswordError}</span>}</p>
                       <MainInput
                         placeholder="Пароль от почты..."
-                        value={editedEmails[index].password}
+                        value={editedEmails[index]?.password || ""}
                         onChange={(e) => handleEmailChange(index, 'password', e.target.value)}
                         type={editingEmailIndex === index ? "text" : "password"}
                         disabled={editingEmailIndex !== index}
@@ -331,7 +329,7 @@ const AccountContent = observer(() => {
         )}
 
         <div className="row mt-4">
-          <div className="col-md-4 col-sm-12">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <PrimaryButton
               className="main-button full-width m-bottom"
               text="Удалить все"
@@ -340,7 +338,7 @@ const AccountContent = observer(() => {
           </div>
         </div>
       </div>
-      <MainModal open={hasError} handleClose={() => setHasError(false)} errorMessage={errorMessage} />
+      <MainModal open={hasError} message={errorMessage} handleClose={() => setHasError(false)} errorMessage={errorMessage} iconSrc="/icons/exclamation.svg" iconAlt="Error" />
     </div>
   );
 });

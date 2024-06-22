@@ -165,6 +165,15 @@
     margin-right: 20px;
 }
 
+@media (max-width: 1079px) {
+    .email-input {
+        width: 50%;
+    }
+    .edit-email-btn {
+        width: 100%;
+    }
+}
+
 @media (max-width: 576px) {
     .login-form {
         width: 100%;

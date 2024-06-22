@@ -8,22 +8,23 @@ import useAuthenticate from "../../hooks/useAuthenticate";
 
 import PrimaryButton from "../ui/PrimaryButton";
 import SecondaryButton from "../ui/SecondaryButton";
+import MainModal from "../general/MainModal";
 
 import "./auth.css";
 
 const AddInfoForm = () => {
     const [hasError, setHasError] = useState(false);
-    const [name, setName] = useState("UserName");
-    const [info, setInfo] = useState("UserInfo");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [name, setName] = useState("");
+    const [info, setInfo] = useState("");
     const [nameError, setNameError] = useState("");
-    const [infoError, setPasswordError] = useState("");
+    const [infoError, setInfoError] = useState("");
     const navigate = useNavigate();
-    const { updateName, updateInfo } = useAuthenticate();
-
+    const { updateInfo } = useAuthenticate();
 
     const onAddClick = async () => {
         setNameError("");
-        setPasswordError("");
+        setInfoError("");
 
         let hasError = false;
 
@@ -33,16 +34,16 @@ const AddInfoForm = () => {
         }
 
         if (!info) {
-            setPasswordError("Введите информацию о себе");
+            setInfoError("Введите информацию о себе");
             hasError = true;
         }
 
         if (!hasError) {
             try {
-                await updateName(name);
-                await updateInfo(info);
+                await updateInfo(name, info);
                 navigate(HOME_ROUTE);
             } catch (e) {
+                setErrorMessage("Ошибка при обновлении информации: " + (e.response?.data?.detail || e.message));
                 setHasError(true);
             }
         }
@@ -99,6 +100,7 @@ const AddInfoForm = () => {
                     <SecondaryButton text="Пропустить" callback={onSkipClick} className="full-line margin-top" />
                 </div>
             </div>
+            <MainModal open={hasError} handleClose={() => setHasError(false)} message={errorMessage} iconSrc="/icons/exclamation.svg" iconAlt="Error" />
         </div>
     );
 };
