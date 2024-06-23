@@ -2,12 +2,10 @@ import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState, useCallback } from "react";
 import { CircularProgress, Box } from "@mui/material";
-
 import { getUserInfo } from "./clients/UserClient";
-
 import { Context } from ".";
-
 import AppRouter from "./components/general/AppRouter";
+import ScrollToTop from './components/general/ScrollToTop';
 
 const App = observer(() => {
   const { user } = useContext(Context);
@@ -60,6 +58,7 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AppRouter />
     </BrowserRouter>
   );

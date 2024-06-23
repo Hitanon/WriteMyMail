@@ -80,6 +80,14 @@ a {
   font-size: 14px;
 }
 
+input:hover {
+  cursor: pointer;
+}
+
+textarea:hover {
+  cursor: pointer;
+}
+
 .link {
   color: white;
   text-decoration: none;

@@ -15,7 +15,7 @@ import {
 
 
 const useAuthenticate = () => {
-    const { user } = useContext(Context);
+    const { user, generateParams, letter, sendMail } = useContext(Context);
 
     const getUserIdFromToken = (token) => {
         const decoded = jwtDecode(token);
@@ -53,12 +53,11 @@ const useAuthenticate = () => {
     };
 
     const logout = async () => {
-        user.setId("");
-        user.setLogin("");
-        user.setName("");
-        user.setInfo("");
-        user.setEmails([]);
-        user.setIsAuth(false);
+        user.clear();
+        generateParams.clear();
+        letter.clear();
+        sendMail.clear();
+        
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("userId");
@@ -66,7 +65,7 @@ const useAuthenticate = () => {
 
     const addEmail = async ({ email, password }) => {
         const emailData = {
-            id: user.id,
+            id: "",
             name: email,
             password: password,
             user: {

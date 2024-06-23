@@ -8,16 +8,16 @@ const useGenerate = () => {
     const improveLetter = async ({ 
         userName,
         subject,
-        text }) => {
+        text 
+    }) => {
         const letterData = {
-            senderName: userName,
+            sender: userName,
             subject,
-            text,
+            body: text,
         };
-        const improvedLetter = await getImprovedLetter(letterData);
-
-        letter.setSubject(improvedLetter.subject);
-        letter.setText(improvedLetter.text);
+        const response = await getImprovedLetter(letterData);
+        // letter.setSubject(improvedLetter.subject);
+        letter.setText(response.data.text);
     }
 
     const generateLetter = async ({ 
@@ -28,16 +28,17 @@ const useGenerate = () => {
         addRequirements,
      }) => {
         const letterData = {
-            senderName: userName,
-            aboutSender,
-            aboutRecipient,
+            sender: userName,
+            senderInfo: aboutSender,
+            recipientInfo: aboutRecipient,
             purpose,
-            addRequirements,
+            requirements: addRequirements,
         };
-        const generatedLetter = await getGeneratedLetter(letterData);
 
-        letter.setSubject(generatedLetter.subject);
-        letter.setText(generatedLetter.text);
+        const response = await getGeneratedLetter(letterData);
+
+        letter.setSubject(response.data.subject);
+        letter.setText(response.data.text);
     }
 
     return {

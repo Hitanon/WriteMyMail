@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_AUTH_REFRESH } from "../utils/Consts";
 
 const $host = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
@@ -31,7 +32,7 @@ const setTokens = (accessToken, refreshToken) => {
 
 const refreshAccessToken = async () => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/auth/refresh`, null, {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}${API_AUTH_REFRESH}`, null, {
             params: { refreshToken: getRefreshToken() }
         });
         const { accessToken, refreshToken } = response.data;
@@ -58,7 +59,6 @@ $authHost.interceptors.response.use(
                 return $authHost(originalRequest);
             } catch (refreshError) {
                 console.error("Failed to refresh token", refreshError);
-                // Handle refresh token expiration or other errors
             }
         }
         return Promise.reject(error);

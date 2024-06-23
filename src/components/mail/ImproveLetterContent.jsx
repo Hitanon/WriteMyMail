@@ -98,7 +98,7 @@ const ImproveLetterContent = observer(() => {
             setIsLoading(true);
             try {
                 await improveLetter({ userName, subject: subjectLetter, text: textLetter });
-                setSubjectLetter(letter.subject);
+                // setSubjectLetter(letter.subject);
                 setTextLetter(letter.text);
             } catch (e) {
                 setErrorMessage("Ошибка при генерации письма: " + e.message);
@@ -113,19 +113,19 @@ const ImproveLetterContent = observer(() => {
         if (validateImproveFields() && validateSendFields()) {
             setIsMailSending(true);
             try {
-                const response = await sendMail(userName, userMail, subjectLetter, textLetter, recipientMail);
-                if (response.text === "OK") {
+                const response = await sendMail(userMail.name, subjectLetter, textLetter, recipientMail);
+                if (response.status === 200) {
                     setIsMailSuccess(true);
-                    setSuccessMessage(`Письмо успешно отправлено с ${userMail.email} на ${recipientMail}`);
+                    setSuccessMessage(`Письмо успешно отправлено с ${userMail.name} на ${recipientMail}`);
                 } else {
                     setIsMailSuccess(false);
                     setHasError(true);
-                    setErrorMessage("Ошибка при отправке письма");
+                    setErrorMessage("Ошибка при отправке письма. Попоробуйте отправить письмо позже");
                 }
             } catch (e) {
                 setIsMailSuccess(false);
                 setHasError(true);
-                setErrorMessage("Ошибка при отправке письма: " + e.message);
+                setErrorMessage("Ошибка при отправке письма. Проверьте пароль и доступ к вашей почте");
             } finally {
                 setIsMailSending(false);
             }
@@ -173,14 +173,14 @@ const ImproveLetterContent = observer(() => {
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                     <PrimaryButton
                         className='main-button full-width m-bottom'
                         text="Улучшить письмо"
                         callback={onImproveClick}
                     />
                 </div>
-                <div className=" col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                     <SecondaryButton
                         className='main-button full-width m-bottom'
                         text={letter.text ? "Отменить изменения" : "Очистить"}

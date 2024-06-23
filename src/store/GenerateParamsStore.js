@@ -31,4 +31,10 @@ export default class GenerateParamsStore {
     get addRequirements() {
         return this._addRequirements;
     }
+
+    clear() {
+        this._aboutRecipient = "";
+        this._purpose = "";
+        this._addRequirements = "";
+    }
 }

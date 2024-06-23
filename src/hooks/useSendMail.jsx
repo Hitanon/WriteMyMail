@@ -2,11 +2,10 @@ import { postMail } from '../clients/MailClient';
 
 const useSendMail = () => {
 
-    const sendMail = async (userName, userMail, subjectLetter, textLetter, recipientMail) => {
+    const sendMail = async (userMail, subjectLetter, textLetter, recipientMail) => {
         const letterData = {
-            userName,
-            senderMail: userMail, 
-            recipientMail,
+            from: userMail, 
+            to: recipientMail,
             subject: subjectLetter,
             text: textLetter,
         };

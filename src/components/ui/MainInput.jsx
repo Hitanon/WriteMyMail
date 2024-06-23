@@ -19,7 +19,7 @@ const MainInput = ({ placeholder, value, onChange, isLoading, disabled = false, 
                 className="custom-input"
                 type={type}
                 placeholder={isLoading ? loadingText : placeholder}
-                value={isLoading ? '' : value}
+                value={isLoading ? '' : (value ?? '')}
                 onChange={onChange}
                 disabled={isLoading || disabled}
             />

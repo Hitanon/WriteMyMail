@@ -51,7 +51,7 @@ export default class UserStore {
         return this._info;
     }
 
-    addEmail (email) {
+    addEmail(email) {
         this._emails.push(email);
     }
 
@@ -61,5 +61,14 @@ export default class UserStore {
 
     get emails() {
         return this._emails;
+    }
+
+    clear() {
+        this._isAuth = false;
+        this._id = "";
+        this._login = "";
+        this._name = "";
+        this._info = "";
+        this._emails = [];
     }
 }

@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 8px
 }
 
 .login-form {
@@ -150,6 +151,7 @@
     align-items: center;
     margin-top: 24px;
 }
+
 .email-input {
     width: 45%;
     margin-right: 20px;
@@ -165,21 +167,24 @@
     margin-right: 20px;
 }
 
+@media (max-width: 767px) {
+    .login-form {
+        width: 100%;
+        padding: 80px 60px;
+    }
+}
+
 @media (max-width: 1079px) {
     .email-input {
         width: 50%;
     }
+
     .edit-email-btn {
         width: 100%;
     }
 }
 
-@media (max-width: 576px) {
-    .login-form {
-        width: 100%;
-        padding: 80px 60px;
-    }
-
+@media (max-width: 1199px) {
     .login-section {
         align-items: flex-start;
         flex-direction: column;
@@ -201,6 +206,7 @@
     .buttons-row {
         flex-direction: column;
     }
+
     .edit-email-btn {
         width: 100%;
     }

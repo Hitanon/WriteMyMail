@@ -52,7 +52,7 @@ const MailSending = observer(({
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                     {isMailSending ? (
                         <CircularProgress color="inherit" />
                     ) : (

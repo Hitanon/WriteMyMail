@@ -27,4 +27,9 @@ export default class SendMailStore {
     updateSenderMail() {
         this._senderMail = this._userStore.emails.length > 0 ? this._userStore.emails[0] : "";
     }
+
+    clear() {
+        this._senderMail = this._userStore.emails.length > 0 ? this._userStore.emails[0] : "";
+        this._recipientMail = "";
+    }
 }

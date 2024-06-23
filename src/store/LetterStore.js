@@ -22,4 +22,10 @@ export default class LetterStore {
     get text() {
         return this._text;
     }
+
+    clear() {
+        this._aboutRecipient = "";
+        this._purpose = "";
+        this._addRequirements = "";
+    }
 }

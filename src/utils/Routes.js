@@ -23,38 +23,47 @@ import {
 export const routes = [
     {
         path: MAIN_ROUTE,
-        element: <Main />,
+        element: Main,
+        private: false,
     },
     {
         path: HOME_ROUTE,
-        element: <Home />,
+        element: Home,
+        private: true,
     },
     {
         path: IMPROVE_LETTER_ROUTE,
-        element: <ImproveLetter />,
+        element: ImproveLetter,
+        private: true,
     },
     {
         path: GENERATE_LETTER_ROUTE,
-        element: <GenerateLetter />,
+        element: GenerateLetter,
+        private: true,
     },
     {
         path: ACCOUNT_ROUTE,
-        element: <Account />,
+        element: Account,
+        private: true,
     },
     {
         path: LOGIN_ROUTE,
-        element: <Login />,
-    }, 
+        element: Login,
+        private: false,
+    },
     {
         path: REGISTRATION_ROUTE,
-        element: <Registration />,
+        element: Registration,
+        private: false,
     },
     {
         path: ADD_EMAIL_ROUTE,
-        element: <AddEmail />,
+        element: AddEmail,
+        private: true,
     },
     {
         path: ADD_INFO_ROUTE,
-        element: <AddInfo />,
+        element: AddInfo,
+        private: true,
     },
 ];

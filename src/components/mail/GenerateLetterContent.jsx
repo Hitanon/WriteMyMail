@@ -152,19 +152,19 @@ const GenerateLetterContent = observer(() => {
         if (validateSendFields()) {
             setIsMailSending(true);
             try {
-                const response = await sendMail(userName, userMail, subjectLetter, textLetter, recipientMail);
-                if (response.text === "OK") {
+                const response = await sendMail(userMail.name, subjectLetter, textLetter, recipientMail);
+                if (response.status === 200) {
                     setIsMailSuccess(true);
-                    setSuccessMessage(`Письмо успешно отправлено с ${userMail.email} на ${recipientMail}`);
+                    setSuccessMessage(`Письмо успешно отправлено с ${userMail.name} на ${recipientMail}`);
                 } else {
                     setIsMailSuccess(false);
                     setHasError(true);
-                    setErrorMessage("Ошибка при отправке письма");
+                    setErrorMessage("Ошибка при отправке письма. Попоробуйте отправить письмо позже");
                 }
             } catch (e) {
                 setIsMailSuccess(false);
                 setHasError(true);
-                setErrorMessage("Ошибка при отправке письма: " + e.message);
+                setErrorMessage("Ошибка при отправке письма. Проверьте пароль и доступ к вашей почте");
             } finally {
                 setIsMailSending(false);
             }
@@ -226,19 +226,20 @@ const GenerateLetterContent = observer(() => {
                 <div className="col-md-12">
                     <div className="dashboard-card">
                         <p>Требования к письму <span className="add-requierements">(не обязательно)</span>:</p>
-                        <MainInput placeholder="Опишите любые дополнительные требования к письму" value={addRequirements} onChange={handleInputChange(setAddRequirements)} />
+                        {/* <MainInput placeholder="Опишите любые дополнительные требования к письму" value={addRequirements} onChange={handleInputChange(setAddRequirements)} /> */}
+                        <MainTextArea placeholder="Опишите любые дополнительные требования к письму" value={addRequirements} onChange={handleInputChange(setAddRequirements)} />
                     </div>
                 </div>
             </div>
             <div className="row mt-1">
-                <div className="col-lg-4 col-md-6 col-sm-12">
+                <div className="col-xl-4 col-lg-6 col-md-12">
                     <PrimaryButton
                         className='main-button full-width m-bottom'
                         text="Cгенеририовать письмо"
                         callback={onGenerateClick}
                     />
                 </div>
-                <div className="col-md-4 col-sm-12">
+                <div className="col-lg-4 col-md-6 col-sm-12">
                     {letter.text &&
                         <SecondaryButton
                             className='main-button full-width m-bottom'

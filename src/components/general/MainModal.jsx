@@ -20,7 +20,7 @@ const MainModal = ({ open, handleClose, message, iconSrc, iconAlt }) => {
         </IconButton>
         <div className="modal-content">
           <img src={iconSrc} alt={iconAlt} className="error-icon" />
-          <Typography variant="h6" className="error-text">
+          <Typography variant="p" className="error-text">
             {message}
           </Typography>
         </div>
