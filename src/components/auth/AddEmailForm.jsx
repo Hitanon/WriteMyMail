@@ -17,8 +17,8 @@ import "./auth.css";
 const AddEmailForm = () => {
     const [hasError, setHasError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [email, setEmail] = useState("test@email.com");
-    const [password, setPassword] = useState("1234");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
@@ -48,14 +48,17 @@ const AddEmailForm = () => {
             setPasswordError("Пароль не может быть пустым");
             hasError = true;
         }
-        
+
 
         if (!hasError) {
             try {
                 await addEmail({ email, password });
                 navigate(ADD_INFO_ROUTE);
             } catch (e) {
-                setErrorMessage("Ошибка при добавлении почты: " + (e.response?.data?.detail || e.message));
+                const errorMessage = (e?.response?.data?.violations?.length > 0 && e.response.data.violations[0]?.message) ||
+                    e?.response?.data?.detail ||
+                    e.message;
+                setErrorMessage("Невозможно добавить почту: " + errorMessage);
                 setHasError(true);
             }
         }

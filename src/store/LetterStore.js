@@ -24,8 +24,7 @@ export default class LetterStore {
     }
 
     clear() {
-        this._aboutRecipient = "";
-        this._purpose = "";
-        this._addRequirements = "";
+        this._subject = "";
+        this._text = "";
     }
 }

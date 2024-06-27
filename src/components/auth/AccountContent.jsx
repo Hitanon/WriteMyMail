@@ -106,7 +106,10 @@ const AccountContent = observer(() => {
       setEditEmailError("");
       setEditPasswordError("");
     } catch (e) {
-      setErrorMessage("Ошибка при обновлении почты: " + e?.message);
+      const errorMessage = (e?.response?.data?.violations?.length > 0 && e.response.data.violations[0]?.message) ||
+        e?.response?.data?.detail ||
+        e.message;
+      setErrorMessage("Ошибка при обновлении почты: " + errorMessage);
       setHasError(true);
     } finally {
       setEditedEmails(user.emails.map(email => ({ ...email })));
@@ -139,7 +142,10 @@ const AccountContent = observer(() => {
       setNewEmailError("");
       setNewPasswordError("");
     } catch (e) {
-      setErrorMessage("Ошибка при добавлении почты: " + e.message);
+      const errorMessage = (e?.response?.data?.violations?.length > 0 && e.response.data.violations[0]?.message) ||
+      e?.response?.data?.detail ||
+      e.message;
+      setErrorMessage("Невозможно добавить почту: " + errorMessage);
       setHasError(true);
     } finally {
       setEditedEmails(user.emails.map(email => ({ ...email })));

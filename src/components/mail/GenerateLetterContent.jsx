@@ -226,7 +226,6 @@ const GenerateLetterContent = observer(() => {
                 <div className="col-md-12">
                     <div className="dashboard-card">
                         <p>Требования к письму <span className="add-requierements">(не обязательно)</span>:</p>
-                        {/* <MainInput placeholder="Опишите любые дополнительные требования к письму" value={addRequirements} onChange={handleInputChange(setAddRequirements)} /> */}
                         <MainTextArea placeholder="Опишите любые дополнительные требования к письму" value={addRequirements} onChange={handleInputChange(setAddRequirements)} />
                     </div>
                 </div>

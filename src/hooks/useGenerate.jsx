@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Context } from "../";
-import { getImprovedLetter, getGeneratedLetter } from '../clients/LetterCLient';
+import { getImprovedLetter, getGeneratedLetter } from '../clients/LetterClient';
 
 const useGenerate = () => {
     const { letter } = useContext(Context);
@@ -16,7 +16,7 @@ const useGenerate = () => {
             body: text,
         };
         const response = await getImprovedLetter(letterData);
-        // letter.setSubject(improvedLetter.subject);
+        letter.setSubject(response.data.subject);
         letter.setText(response.data.text);
     }
 
