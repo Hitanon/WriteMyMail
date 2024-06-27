@@ -45,7 +45,7 @@ const HomeHeader = observer(() => {
                     <div className="row mt-5">
                         <div className="col-md-9 dashboard-title">
                             <h2>
-                                1. Добавьте почту и инофрмацию о себе в аккаунт
+                                Добавьте почту и инофрмацию о себе в аккаунт
                             </h2>
                             <img className="dashboard-logo" src="/icons/account.svg" alt="Account" />
                         </div>
@@ -67,7 +67,7 @@ const HomeHeader = observer(() => {
             <div className="row mt-5">
                 <div className="col-md-9 dashboard-title">
                     <h2>
-                        2. Выберите режим для генерации
+                        Выберите режим для генерации
                     </h2>
                     <img className="dashboard-logo" src="/icons/select.svg" alt="Select" />
                 </div>
